@@ -14,6 +14,15 @@ message CheckIsSupportResponse {
   bool is_support = 1;
 }
 
+message RegisterCashbackRequest{
+  int64 user_id = 1;
+}
+
+message Response {
+  string Error = 1;
+}
+
 service TariffService {
   rpc CheckSupportFlat (CheckIsSupportRequest) returns (CheckIsSupportResponse);
+  rpc RegisterCashbackShipment(RegisterCashbackRequest) returns (Response);
 }

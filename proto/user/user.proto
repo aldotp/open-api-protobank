@@ -2,3 +2,85 @@ syntax = "proto3";
 
 package user;
 
+option go_package = "./protobuff/user/";
+
+message LimitRequest {
+  int64 user_id = 1;
+  string name = 2;
+  string path = 3;
+  string app = 4;
+  string method = 5;
+}
+
+message LimitResponse {
+  int64 id = 1;
+  int64 user_id = 2;
+  string name = 3;
+  string path = 4;
+  string app = 5;
+  string method = 6;
+  int64 request_count = 7;
+  string reset_at = 8;
+  string created_at = 9;
+  string updated_at = 10;
+}
+
+message Response {
+  string Error = 1;
+}
+
+message UpdateParentLimitRequest {
+  int64 user_id = 1;
+  int64 count = 2;
+}
+
+message ExpiredUserRequest {
+  int64 id = 1;
+}
+
+message CheckAuthRequest {
+  string token = 1;
+}
+
+message CheckAuthV1Response {
+  int64 id = 1;
+  string name = 2;
+  string email = 3;
+  string phone_number = 4;
+  string api_key = 5;
+  bool is_active = 6;
+  string expired_date = 7;
+  bool is_private_key = 8;
+  string ip_addresses = 9;
+  string android_keys = 10;
+  string ios_keys = 11;
+  bool is_lifetime = 12;
+}
+
+message CheckAuthV2Response {
+  int64 id = 1;
+  string name = 2;
+  string email = 3;
+  string phone_number = 4;
+  string email_verified_at = 5;
+  int64 limit = 6;
+  int64 total_hit = 7;
+  int64 level = 8;
+  string api_key = 9;
+  string expired_date = 10;
+  bool is_private_key = 11;
+  string ip_addresses = 12;
+  string android_keys = 13;
+  string ios_keys = 14;
+  bool is_lifetime = 15;
+}
+
+
+service UserService {
+  rpc CreateLimit (LimitRequest) returns (LimitResponse);
+  rpc UpdateLimit (LimitRequest) returns (Response);
+  rpc UpdateParentLimit(LimitRequest) returns (Response);
+  rpc HandleExpiredUserSubscription(ExpiredUserRequest) returns (Response);
+  rpc CheckAuthApiV1(CheckAuthRequest) returns (CheckAuthV1Response);
+  rpc CheckAuthApiV2(CheckAuthRequest) returns (CheckAuthV2Response);
+}
