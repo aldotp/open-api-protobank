@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package tariff;
 
-option go_package = "./pkg";
+option go_package = "./protobuff/tariff/";
 
 message CheckIsSupportRequest {
   int64 sender_destination_id = 1;
