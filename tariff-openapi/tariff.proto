@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package tariff;
+
+option go_package = "./pkg";
+
+message CheckIsSupportRequest {
+  int64 sender_destination_id = 1;
+  int64 recipient_destination_id = 2;
+  string shipping = 3;
+}
+
+message CheckIsSupportResponse {
+  bool is_support = 1;
+}
+
+service TariffService {
+  rpc CheckSupportFlat (CheckIsSupportRequest) returns (CheckIsSupportResponse);
+}
