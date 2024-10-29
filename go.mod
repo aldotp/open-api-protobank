@@ -1,4 +1,4 @@
-module github.com/aldotp/protobank-openapi
+module github.com/aldotp/openapi-protobank
 
 go 1.21
 
